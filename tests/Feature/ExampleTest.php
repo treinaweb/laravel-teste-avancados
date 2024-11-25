@@ -10,10 +10,13 @@ class ExampleTest extends TestCase
     /**
      * A basic test example.
      */
-    public function test_the_application_returns_a_successful_response(): void
+    public function test_conhecendo_asserts_de_http(): void
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $this->get('/status-ok')->assertOk();
+        $this->get('/status-not-found')->assertNotFound();
+        $this->get('/successful')->assertSuccessful();
+        $this->get('/redirect')->assertRedirect('/home');
+        $this->get('/forbidden')->assertForbidden();
+        $this->get('/unauthorized')->assertUnauthorized();
     }
 }
