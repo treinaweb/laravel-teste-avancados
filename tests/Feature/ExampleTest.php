@@ -19,4 +19,21 @@ class ExampleTest extends TestCase
         $this->get('/forbidden')->assertForbidden();
         $this->get('/unauthorized')->assertUnauthorized();
     }
+
+    public function test_conhecendo_asserts_de_http_2(): void
+    {
+        $response = $this->get('/greeting');
+        $response->assertSeeText('Welcome to Laravel');
+        $response->assertSeeHtml('Welcome <br>to<br> Laravel');
+
+        $this->get('/no-error')->assertDontSeeText('Houve um erro');
+
+        $response = $this->get('/headers');
+        $response->assertHeader('Content-Type', 'text/plain; charset=UTF-8');
+        $response->assertHeader('Cache-Control', 'no-cache, private');
+
+        $this->get('/no-custom-header')->assertHeaderMissing('X-treinaweb-header');
+
+        $this->get('/empty')->assertNoContent();
+    }
 }
