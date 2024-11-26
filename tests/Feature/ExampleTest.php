@@ -36,4 +36,15 @@ class ExampleTest extends TestCase
 
         $this->get('/empty')->assertNoContent();
     }
+
+    function teste_conhecendo_asserts_de_view()
+    {
+        $response = $this->get('/clients');
+
+        $response->assertViewIs('clients')
+                ->assertViewHas('clients', [])
+                ->assertViewHas('extra_info', 'Informações adicionais')
+                ->assertSeeText('João')
+                ->assertSeeText('Informações adicionais');
+    }
 }

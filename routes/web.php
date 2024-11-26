@@ -56,7 +56,12 @@ Route::get('/empty', function () {
     return response('', 204);
 });
 
-
+Route::get('/clients', function(){
+    return view('clients', [
+        'clients' => [],
+        'extra_info' => 'Informações adicionais'
+    ]);
+});
 
 
 
