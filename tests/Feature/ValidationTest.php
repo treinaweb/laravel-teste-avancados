@@ -26,4 +26,31 @@ class ValidationTest extends TestCase
                  ->assertValid()
                  ->assertSeeText($tarefa);
     }
+
+    public function test_deve_retornar_erro_de_validacao_quando_a_tarefa_nao_for_informada()
+    {
+         //Act
+         $response = $this->post('/tasks', []);
+
+         //Asserts
+         $response->assertInvalid([
+            'tarefa' => 'Preencha o campo tarefa'
+         ]);
+    }
+
+    public function test_deve_retornar_erro_de_validacao_quando_a_tarefa_for_menor_do_que_o_esperado()
+    {
+        //Arrange
+        $tarefaInvalida = 'Inva';
+
+         //Act
+         $response = $this->post('/tasks', [
+            'tarefa' => $tarefaInvalida
+         ]);
+
+         //Asserts
+         $response->assertInvalid([
+            'tarefa' => 'Tamanho mínimo para a tarefa é 5 caracteres'
+         ]);
+    }
 }
