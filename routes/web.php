@@ -75,4 +75,6 @@ Route::post('/users', function(Request $request) {
     User::create($request->all());
 });
 
-
+Route::delete('/users/{user}', function(User $user) {
+    $user->delete();
+});

@@ -28,6 +28,10 @@ class DatabaseTest extends TestCase
 
         //Asserts
         $this->assertDatabaseCount('users', 1);
+        $this->assertDatabaseHas('users', [
+            'name' => 'Elton',
+            'email' => 'elton.fonseca@treinaweb.com.br',
+        ]);
     }
 
     public function test_verifica_se_consegue_criar_o_usuario_com_sucesso2(): void
@@ -107,5 +111,21 @@ class DatabaseTest extends TestCase
                 ->assertViewHas('users', function($users){
                     return $users->count() === 5;
                 });
+    }
+
+    public function test_verifica_se_consegue_apagar_um_usuario_do_banco_corretamente()
+    {
+        //Arrange
+        $user = User::factory()->create();
+
+        //Act
+        $this->delete("/users/$user->id");
+
+        //Asserts
+        $this->assertModelMissing($user);
+        $this->assertDatabaseMissing('users', [
+            'id' => $user->id
+        ]);
+        $this->assertDatabaseCount('users', 0);
     }
 }
