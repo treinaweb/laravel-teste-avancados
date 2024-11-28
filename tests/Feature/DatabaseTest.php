@@ -91,4 +91,21 @@ class DatabaseTest extends TestCase
                 ->assertSeeText($user1->email)
                 ->assertSeeText($user2->email);
     }
+
+    public function test_verifica_se_a_paginacao_tem_a_quantidade_de_itens_correto()
+    {
+        //Arrange
+        $this->seed();
+        // User::factory(10)->create();
+
+        //Act
+        $response = $this->get('/users');
+
+        //Asserts
+        $response->assertOk()
+                ->assertViewIs('clients.index')
+                ->assertViewHas('users', function($users){
+                    return $users->count() === 5;
+                });
+    }
 }

@@ -64,7 +64,7 @@ Route::get('/clients', function(){
 });
 
 Route::get('/users', function(){
-    $users = User::get();
+    $users = User::paginate(5);
 
     return view('clients.index', [
         'users' => $users
