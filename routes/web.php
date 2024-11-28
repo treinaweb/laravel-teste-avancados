@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -63,6 +65,8 @@ Route::get('/clients', function(){
     ]);
 });
 
-
+Route::post('/users', function(Request $request) {
+    User::create($request->all());
+});
 
 
