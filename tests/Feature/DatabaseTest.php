@@ -74,4 +74,21 @@ class DatabaseTest extends TestCase
                 ->assertSeeText($users[0]['email'])
                 ->assertSeeText($users[1]['email']);
     }
+    
+    public function test_verifica_se_os_usuarios_sao_listados_corretamente2()
+    {
+        //Arrange
+        $user1 = User::factory()->create();
+        $user2 = User::factory()->create();
+
+        //Act
+        $response = $this->get('/users');
+
+        //Asserts
+        $response->assertOk()
+                ->assertViewIs('clients.index')
+                ->assertViewHas('users')
+                ->assertSeeText($user1->email)
+                ->assertSeeText($user2->email);
+    }
 }
