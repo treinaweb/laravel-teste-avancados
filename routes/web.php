@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Requests\TaskRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -77,4 +78,10 @@ Route::post('/users', function(Request $request) {
 
 Route::delete('/users/{user}', function(User $user) {
     $user->delete();
+});
+
+Route::post('/tasks', function(TaskRequest $request) {
+    //vou cadastrar
+
+    return $request->tarefa;
 });
