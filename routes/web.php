@@ -8,9 +8,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/users', function(){
-    return 'Olá, Elton';
-});
+
 
 Route::get('/status-ok', function () {
     return response('OK', 200);
@@ -62,6 +60,14 @@ Route::get('/clients', function(){
     return view('clients', [
         'clients' => [],
         'extra_info' => 'Informações adicionais'
+    ]);
+});
+
+Route::get('/users', function(){
+    $users = User::get();
+
+    return view('clients.index', [
+        'users' => $users
     ]);
 });
 
