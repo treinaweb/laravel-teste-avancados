@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\ImageProcessed;
 use App\Http\Requests\TaskRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -112,4 +113,12 @@ Route::post('/products', function(Request $request) {
     Cache::put('product', $product);
 
     return 'produto adicionado ao cache';
+});
+
+Route::post('/products/images/process', function() {
+    //faz o processamento da imagem pesada
+
+    ImageProcessed::dispatch();
+
+    return 'imagem processada com sucesso';
 });
