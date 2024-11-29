@@ -42,4 +42,26 @@ class CacheTest extends TestCase
         $response->assertOk()
                 ->assertJson([]);
     }
+
+    public function test_deve_add_produto_ao_cache()
+    {
+        //Arrange
+        Cache::spy();
+
+        $produto = [
+            'id' => 1001,
+            'name' => 'carrinho'
+        ];
+
+        //Act
+        $response = $this->post('/products', $produto);
+
+        //Assert
+        $response->assertOk()
+                ->assertSeeText('produto adicionado ao cache');
+
+        Cache::shouldHaveReceived('put')
+                ->once()
+                ->with('product', $produto);
+    }
 }

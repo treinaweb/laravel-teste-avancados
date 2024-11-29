@@ -105,3 +105,11 @@ Route::get('/products', function(){
 
     return $products;
 });
+
+Route::post('/products', function(Request $request) {
+    $product = $request->only(['id', 'name']);
+
+    Cache::put('product', $product);
+
+    return 'produto adicionado ao cache';
+});
