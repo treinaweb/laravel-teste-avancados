@@ -85,3 +85,7 @@ Route::post('/tasks', function(TaskRequest $request) {
 
     return $request->tarefa;
 });
+
+Route::get('/protegida', function() {
+    return ['Rota acessada com sucesso'];
+})->middleware('auth');
