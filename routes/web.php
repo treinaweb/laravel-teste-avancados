@@ -3,6 +3,7 @@
 use App\Http\Requests\TaskRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -97,4 +98,10 @@ Route::post('/cart', function(Request $request) {
     Session::push('cart_items', $item);
 
     return 'item adicionado com sucesso';
+});
+
+Route::get('/products', function(){
+    $products = Cache::get('products', []);
+
+    return $products;
 });
