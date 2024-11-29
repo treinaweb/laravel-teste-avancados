@@ -4,6 +4,7 @@ use App\Http\Requests\TaskRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 Route::get('/', function () {
     return view('welcome');
@@ -89,3 +90,11 @@ Route::post('/tasks', function(TaskRequest $request) {
 Route::get('/protegida', function() {
     return ['Rota acessada com sucesso'];
 })->middleware('auth');
+
+Route::post('/cart', function(Request $request) {
+    $item = $request->only(['id', 'qtd']);
+
+    Session::push('cart_items', $item);
+
+    return 'item adicionado com sucesso';
+});
