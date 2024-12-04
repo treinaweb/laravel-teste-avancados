@@ -7,7 +7,7 @@ Desenvolvido no curso de Laravel - Testes Avançados da TreinaWeb Cursos.
 #### Clonar o repositório
 
 ```
-git clone 
+git clone https://github.com/treinaweb/laravel-teste-avancados.git
 ```
 
 #### Instalar as depencências
